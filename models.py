@@ -10,7 +10,7 @@ class Brewer(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
 
-    items = relationship("Recipe", back_populates="brewer")
+    recipes = relationship("Recipe", back_populates="brewer")
 
 
 class Recipe(Base):
@@ -23,6 +23,6 @@ class Recipe(Base):
     brew_time = Column(Float, index=True)
     taste_notes = Column(String, index=True)
     tags = Column(String, index=True)
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    brewer_id = Column(Integer, ForeignKey("brewers.id"))
 
-    owner = relationship("Brewer", back_populates="recipe")
+    brewer = relationship("Brewer", back_populates="recipe")
