@@ -4,6 +4,10 @@ from pydantic import BaseModel
 class RecipeBase(BaseModel):
     title: str
     description: Optional[str] = None
+    coffee: Optional[str] = None
+    brew_time: Optional[float] = 0.0
+    taste_notes: Optional[str] = None
+    tags: Optional[str] = None
 
 class RecipeCreate(ItemBase):
     pass

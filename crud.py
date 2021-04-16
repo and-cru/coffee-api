@@ -1,8 +1,5 @@
-
 from sqlalchemy.orm import Session
-
 from . import models, schemas
-
 
 def get_brewer(db: Session, brewer_id: int):
     return db.query(models.Brewer).filter(models.Brewer.id == user_id).first()
