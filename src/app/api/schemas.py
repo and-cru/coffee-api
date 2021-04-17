@@ -14,7 +14,7 @@ class RecipeCreate(RecipeBase):
 
 class Recipe(RecipeBase):
     id: int
-    owner_id: int
+    brewer_id: int
     class Config:
         orm_mode = True
 

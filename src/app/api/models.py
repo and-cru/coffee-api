@@ -3,11 +3,10 @@ from sqlalchemy.orm import relationship
 
 from app.database import Base
 
-
 class Brewer(Base):
     __tablename__ = "brewer"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, unique=True, index=True)
 
     recipes = relationship("Recipe", back_populates="brewer")
@@ -16,7 +15,7 @@ class Brewer(Base):
 class Recipe(Base):
     __tablename__ = "recipe"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     title = Column(String, index=True)
     coffee = Column(String, index=True)
     description = Column(String, index=True)
