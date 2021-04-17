@@ -15,6 +15,7 @@ class RecipeCreate(RecipeBase):
 class Recipe(RecipeBase):
     id: int
     brewer_id: int
+
     class Config:
         orm_mode = True
 
@@ -22,10 +23,11 @@ class BrewerBase(BaseModel):
     name: str
 
 class BrewerCreate(BrewerBase):
-    name: str
+    pass
 
 class Brewer(BrewerBase):
     id: int
-    recipes: List[Recipe] = []
+    recipes: Optional[List[Recipe]] = []
+
     class Config:
         orm_mode = True

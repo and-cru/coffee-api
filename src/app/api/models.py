@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Brewer(Base):
-    __tablename__ = "brewer"
+    __tablename__ = "brewers"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, unique=True, index=True)
@@ -13,7 +13,7 @@ class Brewer(Base):
 
 
 class Recipe(Base):
-    __tablename__ = "recipe"
+    __tablename__ = "recipes"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     title = Column(String, index=True)
@@ -22,6 +22,6 @@ class Recipe(Base):
     brew_time = Column(Float, index=True)
     taste_notes = Column(String, index=True)
     tags = Column(String, index=True)
-    brewer_id = Column(Integer, ForeignKey("brewer.id"))
+    brewer_id = Column(Integer, ForeignKey("brewers.id"))
 
-    brewer = relationship("Brewer", back_populates="recipe")
+    brewer = relationship("Brewer", back_populates="recipes")
