@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, Float, String
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from app.database import Base
 
 
 class Brewer(Base):
@@ -23,6 +23,6 @@ class Recipe(Base):
     brew_time = Column(Float, index=True)
     taste_notes = Column(String, index=True)
     tags = Column(String, index=True)
-    brewer_id = Column(Integer, ForeignKey("brewers.id"))
+    brewer_id = Column(Integer, ForeignKey("brewer.id"))
 
     brewer = relationship("Brewer", back_populates="recipe")

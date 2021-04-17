@@ -9,7 +9,7 @@ class RecipeBase(BaseModel):
     taste_notes: Optional[str] = None
     tags: Optional[str] = None
 
-class RecipeCreate(ItemBase):
+class RecipeCreate(RecipeBase):
     pass
 
 class Recipe(RecipeBase):
