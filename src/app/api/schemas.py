@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class RecipeBase(BaseModel):
     title: str
     description: Optional[str] = None
-    coffee: Optional[str] = None
+    bean_type: Optional[str] = None
     brew_time: Optional[float] = 0.0
     brew_method: Optional[str] = None
     taste_notes: Optional[str] = None

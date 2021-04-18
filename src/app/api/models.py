@@ -17,7 +17,7 @@ class Recipe(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     title = Column(String, index=True)
-    coffee = Column(String, index=True)
+    bean_type = Column(String, index=True)
     description = Column(String, index=True)
     brew_method = Column(String, index=True)
     brew_time = Column(Float, index=True)
