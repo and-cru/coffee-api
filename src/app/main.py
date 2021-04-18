@@ -44,7 +44,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def delete_brewer(brewer_id: int, db: Session = Depends(get_db)):
     db_user = crud.get_brewer_by_id(db, brewer_id)
     if db_user == None:
-        raise HTTPException(status_code=400, detail="Brewer does not exist")
+        raise HTTPException(status_code=404, detail="Brewer does not exist")
     return crud.delete_brewer(db, brewer_id)
 
 @app.get("/brewers/{brewer_id}", response_model=schemas.Brewer)
