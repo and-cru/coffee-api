@@ -64,3 +64,10 @@ def create_recipe_for_brewer(
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     recipes = crud.get_recipes(db, skip=skip, limit=limit)
     return recipes
+
+@app.delete("/recipes/{recipe_id}", status_code=200)
+def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
+    db_recipe = crud.get_recipe_by_id(db, recipe_id)
+    if db_recipe == None:
+        raise HTTPException(status_code=404, detail="Recipe not found")
+    return crud.delete_brewer_recipe(db, recipe_id)

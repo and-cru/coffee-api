@@ -36,8 +36,11 @@ def create_brewer_recipe(db: Session, recipe: schemas.RecipeCreate, brewer_id: i
     db.refresh(db_recipe)
     return db_recipe
 
-def delete_brewer_recipe(db: Session, recipe_id: int, brewer_id: int):
-    db_recipe = models.Recipe(id=recipe_id)
+def get_recipe_by_id(db: Session, recipe_id: int):
+    return db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
+
+def delete_brewer_recipe(db: Session, recipe_id: int):
+    db_recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
     db.delete(db_recipe)
     db.commit()
-    return db_recipe
+    return {"message": "Successfully deleted recipe"}
