@@ -65,6 +65,11 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     recipes = crud.get_recipes(db, skip=skip, limit=limit)
     return recipes
 
+@app.get("/recipes/{recipe_id}", status_code=200)
+def read_recipe(recipe_id: int, db: Session = Depends(get_db)):
+    crud.update_recipe_views(db, recipe_id)
+    return crud.get_recipe_by_id(db, recipe_id)
+
 @app.delete("/recipes/{recipe_id}", status_code=200)
 def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
     db_recipe = crud.get_recipe_by_id(db, recipe_id)
