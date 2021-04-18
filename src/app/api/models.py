@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, Float, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, Float, String, Enum
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -19,6 +19,7 @@ class Recipe(Base):
     title = Column(String, index=True)
     coffee = Column(String, index=True)
     description = Column(String, index=True)
+    brew_method = Column(String, index=True)
     brew_time = Column(Float, index=True)
     taste_notes = Column(String, index=True)
     tags = Column(String, index=True)
