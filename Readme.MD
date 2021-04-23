@@ -17,3 +17,27 @@ This will build and bring up the services for the CRUD API. Confirm that the app
 `http://localhost:8080/health` -> Returns an I am healthy message
 
 Access the docs for the API by going to `http://localhost:8080/docs`
+
+## Migrations
+
+Using [alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html#the-migration-environment), we can easily run DB migrations. To run a new migration follow the below:
+
+Navigate into `src`
+
+```bash
+cd src/
+```
+
+Then run Alembic revision command:
+
+```bash
+alembic revision -m 'My new migration'
+```
+
+This will generate a new migration file inside the `coffee/version`, edit this file and added the DB chnages.
+
+For the changes to take effect, run:
+
+```bash
+cd .. && docker-compose down && docker-compose up -d --build
+```
