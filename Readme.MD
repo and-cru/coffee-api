@@ -41,3 +41,15 @@ For the changes to take effect, run:
 ```bash
 cd .. && docker-compose down && docker-compose up -d --build
 ```
+
+## Connect to pgAdmin4
+
+To view the DB, open [Chrome](https://www.pgadmin.org/faq/) as limited browsers are supported, then navigate to `localhost:16543/` and login with `username: admin@admin.com` & `password: test123!`
+
+Thereafter click on server -> create new server. Give the server a `name`, to find the hostname run:
+
+```bash
+ifconfig |grep inet
+```
+
+There will be an IP for our Docker network, use that as the hostname. The rest is simple, DB username and password is both `postgres`
