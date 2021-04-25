@@ -3,6 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from app.api import crud, models, schemas
 from app.database import SessionLocal, engine
+from redis import Redis
 
 # models.Base.metadata.create_all(bind=engine)
 
@@ -66,7 +67,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return recipes
 
 @app.get("/recipes/{recipe_id}", status_code=200)
-def read_recipe(recipe_id: int, db: Session = Depends(get_db)):
+def read_recipe(recipe_id: int, db: Session = Depends(get_db), client: redis = Redis(host="redis", port=6379)):
     crud.update_recipe_views(db, recipe_id)
     return crud.get_recipe_by_id(db, recipe_id)
 
