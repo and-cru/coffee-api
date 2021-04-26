@@ -3,6 +3,9 @@ from . import models, schemas
 from redis import Redis
 import jsonpickle
 
+# Expiry time of key-values in redis
+EXPIRY_TIME = (5)
+
 def get_brewer(db: Session, brewer_id: int):
     return db.query(models.Brewer).filter(models.Brewer.id == brewer_id).first()
 
@@ -43,7 +46,7 @@ def get_recipe_by_id(db: Session, recipe_id: int, client):
     redis_resp = client.get(key)
     if redis_resp == None:
         db_resp = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
-        client.set(key, jsonpickle.encode(db_resp))
+        client.setex(key, EXPIRY_TIME, jsonpickle.encode(db_resp))
         return db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
     return jsonpickle.decode(redis_resp)
 
