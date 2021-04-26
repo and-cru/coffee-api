@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from . import models, schemas
 from redis import Redis
+import jsonpickle
 
 def get_brewer(db: Session, brewer_id: int):
     return db.query(models.Brewer).filter(models.Brewer.id == brewer_id).first()
@@ -37,14 +38,14 @@ def create_brewer_recipe(db: Session, recipe: schemas.RecipeCreate, brewer_id: i
     db.refresh(db_recipe)
     return db_recipe
 
-def get_recipe_by_id(db: Session, recipe_id: int, client: Redis):
+def get_recipe_by_id(db: Session, recipe_id: int, client):
     key = "id:" + str(recipe_id) 
     redis_resp = client.get(key)
     if redis_resp == None:
         db_resp = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
-        client.set(key, db_resp)
+        client.set(key, jsonpickle.encode(db_resp))
         return db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
-    return redis_resp
+    return jsonpickle.decode(redis_resp)
 
 def update_recipe_views(db: Session, recipe_id: int):
     db.query(models.Recipe).filter(models.Recipe.id == recipe_id).update({"views": (models.Recipe.views + 1)})
