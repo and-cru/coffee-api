@@ -53,3 +53,7 @@ ifconfig |grep inet
 ```
 
 There will be an IP for our Docker network, use that as the hostname. The rest is simple, DB username and password is both `postgres`
+
+## To-do:
+
+- [ ] Update method - [Pydantic](https://pydantic-docs.helpmanual.io/usage/exporting_models/#modeljson) & [Example](https://github.com/tiangolo/full-stack-fastapi-postgresql/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/backend/app/app/crud/crud_user.py)
